@@ -5,9 +5,7 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function() {
 
     var buttonInnerHTML = this.innerHTML;
-
     makeSound(buttonInnerHTML);
-
     buttonAnimation(buttonInnerHTML);
   });
 }
@@ -15,15 +13,51 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
 //Detecting keyboard press
 
 document.addEventListener("keypress", function(event) {
-
   makeSound(event.key);
   buttonAnimation(event.key);
 
 });
 
+//Random 5 drum Pattern generator!
+var drumPattern = ["w","a","s","d","j","k","l"];
+var n;
+var r = [];
+
+for (n=1; n <= 5; n++) {
+  var seriesElement = Math.floor((Math.random()*(7-n))+1);
+  r.push(drumPattern[seriesElement]);
+}
+
+
+
+// function makeRandomSound(key){
+//   console.log(key);
+//   if(key === "r" || "R"){
+//     var randomNumber = Math.floor(Math.random()*4)+1;
+//     console.log(randomNumber);
+//     var audio = new Audio(`sounds/tom-${randomNumber}.mp3`);
+//     audio.play();
+//   }
+// };
+
+
 function makeSound(key) {
 
   switch (key) {
+    case "r":
+    var randomNumber = Math.floor(Math.random()*4)+1;
+    console.log(randomNumber);
+    var audio = new Audio(`sounds/tom-${randomNumber}.mp3`);     
+    audio.play();
+      break;
+
+      case "R":
+      var randomNumber = Math.floor(Math.random()*4)+1;
+      console.log(randomNumber);
+      var audio = new Audio(`sounds/tom-${randomNumber}.mp3`);     
+      audio.play();
+        break;
+
     case "w":
       var audio = new Audio("sounds/kick-bass.mp3");
       audio.play();
@@ -59,17 +93,25 @@ function makeSound(key) {
       audio.play();
       break;
 
+
     default:
 
   }
+
 }
 
 
+
+
 function buttonAnimation(currentKey) {
-  var activeButton = document.querySelector("." + currentKey);
+  var activeButton = document.querySelector("." + currentKey.toLowerCase());
   activeButton.classList.add("pressed");
   setTimeout(function(){
     activeButton.classList.remove("pressed");
   }, 100);
 
 }
+
+
+
+
